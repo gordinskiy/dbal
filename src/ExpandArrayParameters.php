@@ -114,7 +114,15 @@ final class ExpandArrayParameters implements Visitor
             return;
         }
 
-        $this->appendTypedParameter($value, ArrayParameterType::toElementParameterType($type));
+        if (
+            $type === ArrayParameterType::INTEGER
+            || $type === ArrayParameterType::STRING
+            || $type === ArrayParameterType::ASCII
+        ) {
+            $this->appendTypedParameter($value, ArrayParameterType::toElementParameterType($type));
+        } else {
+            $this->appendTypedParameter($value, $type);
+        }
     }
 
     /** @return array<int,Type|int|string|null> */
