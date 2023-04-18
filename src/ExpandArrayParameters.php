@@ -98,9 +98,10 @@ final class ExpandArrayParameters implements Visitor
         $type = $this->originalTypes[$key];
 
         if (
-            $type !== ArrayParameterType::INTEGER
-            && $type !== ArrayParameterType::STRING
-            && $type !== ArrayParameterType::ASCII
+            $type == ParameterType::INTEGER
+            || $type == ParameterType::STRING
+            || $type == ParameterType::ASCII
+            || is_scalar($value)
         ) {
             $this->appendTypedParameter([$value], $type);
 
