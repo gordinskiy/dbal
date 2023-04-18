@@ -1845,18 +1845,7 @@ class Connection
 
         if ($type instanceof Type) {
             $bindingType = $type->getBindingType();
-
-            if (is_array($value)) {
-                $bindingType += self::ARRAY_PARAM_OFFSET;
-                $platform = $this->getDatabasePlatform();
-                $value = array_map(
-                    static fn($singleValue) => $type->convertToDatabaseValue($singleValue, $platform),
-                    $value
-                );
-            } else {
-                $value = $type->convertToDatabaseValue($value, $this->getDatabasePlatform());
-            }
-
+            $value = $type->convertToDatabaseValue($value, $this->getDatabasePlatform());
         } else {
             $bindingType = $type ?? ParameterType::STRING;
         }
