@@ -1924,6 +1924,13 @@ class Connection
             }
         }
 
+        // For ORM
+        foreach ($params as $param) {
+            if (is_array($param)) {
+                return true;
+            }
+        }
+
         return false;
     }
 
